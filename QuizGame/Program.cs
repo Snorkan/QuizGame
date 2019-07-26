@@ -16,24 +16,32 @@ namespace QuizGame
             Console.WriteLine($"Hello {userName}, let's start playing hehehe."); */
 
             string fileName = @"C:\QuizGame\QuestionAnswer.json";
+            //QuestionCollection questionCollection = new ReadJson().QC(fileName);
 
+            /*List<int> usedQuestions = new List<int>();
+            int randomNumber = new Random().Next(1, maxInt);
+            usedQuestions.Add(randomNumber);*/
+            
             string jsonTxt = string.Empty;
-           
             using (StreamReader r = new StreamReader(fileName))
             {
                 var json = r.ReadToEnd();
                 jsonTxt = json.ToString();
             }
-            
+
             var questionCollection = JsonConvert.DeserializeObject<QuestionCollection>(jsonTxt);
 
             int maxInt = questionCollection.Questions.Count + 1;
 
-            for (int i = 0; i < maxInt; i++)
+            int score = 0;
+
+            for (int i = 1; i < maxInt; i++)
             {
-                int randomNumber = new Random().Next(1, 3);
-                new QuestionCollectionManager().ReturnQuestion(questionCollection, randomNumber);
+                int[] scoreTracker = new QuestionCollectionManager().ReturnQuestion(questionCollection, i);
+                score += scoreTracker[1];
+                Console.WriteLine(score);
             }
+            
 
             
 

@@ -4,12 +4,17 @@ using System.Text;
 
 namespace QuizGame
 {
-    class QuestionCollectionManager
+    public class QuestionCollectionManager
     {
-        public void ReturnQuestion(QuestionCollection questionCollection, int questionNumber)
+        public int[] ReturnQuestion(QuestionCollection questionCollection, int questionNumber)
         {
+            int initializeCount = 3;
+            int score = 0;
+            int[] scoreTracker = { initializeCount, score }; 
+
             Questions question = new Manager().ChooseQuestion(questionCollection, questionNumber);
-            new Manager().Loopiloop(question, 3);
+            scoreTracker = new Manager().Loopiloop(question, scoreTracker);
+            return scoreTracker;
         } 
         
     }

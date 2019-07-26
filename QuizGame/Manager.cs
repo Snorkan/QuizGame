@@ -8,6 +8,7 @@ namespace QuizGame
     {
 
         //from the question collection -> single out one question object
+        
         public Questions ChooseQuestion(QuestionCollection collection, int QuestionNumber)
         {
 
@@ -21,59 +22,69 @@ namespace QuizGame
             return null;
         }
         // 
-        public int[] Loopiloop(Questions question, int[] scoreStats)
+        public int[] Loopiloop(Questions question, int[] scoreTracker)
         {
-            //int i = scoreStats[1];
-
-            while (scoreStats[1] > 0)
+            //scoreStats[0] is the count
+          
+            while (scoreTracker[0] > 0)
             {
-                scoreStats = new Manager().Countdown(question, scoreStats[1]);
+                scoreTracker = new Manager().Countdown(question, scoreTracker);
             }
-            return scoreStats;
+            return scoreTracker;
         }
 
         //
-        public int[] Countdown(Questions question, int count)
+        public int[] Countdown(Questions question, int[] scoreTracker)
         {
-            int score = 0;
-            count--;
-            bool correct = new CheckAnswer().IsCorrect(question);
+            //scoreTracker[0] = count of how many attempt you got left
+            //scoreTracker[1] = keep track of score
 
+            //countdown count - 1
+            scoreTracker[0]--;
+            
+            
+            bool correct = new CheckAnswer().IsCorrect(question);
+            
             if (correct == true) {
                 Console.WriteLine("Correct!");
-                switch (count)
+                switch (scoreTracker[0])
                 {
                     case 2:
-                        score = 5;
-                        break;
+                        scoreTracker[1] = 5;
+                        scoreTracker[0] = 0;
+                        return scoreTracker;
                     case 1:
-                        score = 3;
-                        break;
+                        scoreTracker[1] = 3;
+                        scoreTracker[0] = 0;
+                        return scoreTracker;
                     case 0:
-                        score = 1;
-                        break;
+                        scoreTracker[1] = 1;
+                        scoreTracker[0] = 0;
+                        return scoreTracker;
                 }
-                count = 0;
+                
 
             } else
             {
-                switch (count)
+                switch (scoreTracker[0])
                 {
                     case 2:
                         Console.WriteLine($"Not quite right, plz try again!");
-                        break;
+                        return scoreTracker;
                     case 1:
                         Console.WriteLine($"Oh no u wrong again...");
-                        break;
+                        return scoreTracker;
                     case 0:
                         Console.WriteLine($"u bad. Next question for u.");
-                        break;
+                        return scoreTracker;
                 }
             }
-            int[] scoreStats = { score, count };
-            return scoreStats;
+            
+            return scoreTracker;
         }
 
         
     }
 }
+
+
