@@ -46,23 +46,8 @@ namespace QuizGame
             bool correct = new CheckAnswer().IsCorrect(question);
             
             if (correct == true) {
-                Console.WriteLine("Correct!");
-                switch (scoreTracker[0])
-                {
-                    case 2:
-                        scoreTracker[1] = 5;
-                        scoreTracker[0] = 0;
-                        return scoreTracker;
-                    case 1:
-                        scoreTracker[1] = 3;
-                        scoreTracker[0] = 0;
-                        return scoreTracker;
-                    case 0:
-                        scoreTracker[1] = 1;
-                        scoreTracker[0] = 0;
-                        return scoreTracker;
-                }
-                
+                //Console.WriteLine("Correct!");
+                return new ReturnMessage().ReturnTrue(scoreTracker);
 
             } else
             {
