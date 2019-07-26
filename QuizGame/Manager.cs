@@ -6,6 +6,8 @@ namespace QuizGame
 {
     public class Manager
     {
+
+        //from the question collection -> single out one question object
         public Questions ChooseQuestion(QuestionCollection collection, int QuestionNumber)
         {
 
@@ -18,41 +20,60 @@ namespace QuizGame
             }
             return null;
         }
-
-
-        public int Countdown(Questions question, int count)
+        // 
+        public int[] Loopiloop(Questions question, int[] scoreStats)
         {
+            //int i = scoreStats[1];
+
+            while (scoreStats[1] > 0)
+            {
+                scoreStats = new Manager().Countdown(question, scoreStats[1]);
+            }
+            return scoreStats;
+        }
+
+        //
+        public int[] Countdown(Questions question, int count)
+        {
+            int score = 0;
             count--;
             bool correct = new CheckAnswer().IsCorrect(question);
 
             if (correct == true) {
                 Console.WriteLine("Correct!");
+                switch (count)
+                {
+                    case 2:
+                        score = 5;
+                        break;
+                    case 1:
+                        score = 3;
+                        break;
+                    case 0:
+                        score = 1;
+                        break;
+                }
                 count = 0;
+
             } else
             {
                 switch (count)
                 {
                     case 2:
                         Console.WriteLine($"Not quite right, plz try again!");
-                        return count;
+                        break;
                     case 1:
                         Console.WriteLine($"Oh no u wrong again...");
-                        return count;
+                        break;
                     case 0:
                         Console.WriteLine($"u bad. Next question for u.");
-                        return count;
+                        break;
                 }
             }
-            return count;
+            int[] scoreStats = { score, count };
+            return scoreStats;
         }
 
-        public int Loopiloop(Questions question, int i)
-        {
-            while (i > 0)
-            {
-                i = new Manager().Countdown(question, i);
-            }
-            return i;
-        }
+        
     }
 }
