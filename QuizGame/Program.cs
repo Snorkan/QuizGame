@@ -3,6 +3,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuizGame
 {
@@ -35,15 +36,35 @@ namespace QuizGame
 
             int score = 0;
 
+            // question id 1, 2, 3, 4 ... maxInt
+            List<int> questionId = new Generator().QuestionIds(maxInt);
+
+            
             for (int i = 1; i < maxInt; i++)
             {
-                int[] scoreTracker = new QuestionCollectionManager().ReturnQuestion(questionCollection, i);
+                int l = questionId.Count;
+
+                Console.WriteLine($"items in list: {l}");
+
+                int randomNumber = new Random().Next(0, l);
+
+                Console.WriteLine($"Random number in loop: {randomNumber}");
+                // remove at index randomnumber
+                
+                int[] scoreTracker = new QuestionCollectionManager().ReturnQuestion(questionCollection, questionId[randomNumber]);
+
+                questionId.RemoveAt(randomNumber);
+
+                Console.WriteLine($"items left: {l}");
+
                 score += scoreTracker[1];
-                Console.WriteLine(score);
+                Console.WriteLine($"Your total score is: {score}!!");
             }
             
 
             
+            
+
 
         }
     }
