@@ -27,12 +27,13 @@ namespace QuizGame
             
             var questionCollection = JsonConvert.DeserializeObject<QuestionCollection>(jsonTxt);
 
+            int maxInt = questionCollection.Questions.Count + 1;
 
-            int randomNumber = new Random().Next(1,3);
-
-            Questions question = new Manager().ChooseQuestion(questionCollection, randomNumber);
-
-            new Manager().Loopiloop(question, 3);
+            for (int i = 0; i < maxInt; i++)
+            {
+                int randomNumber = new Random().Next(1, 3);
+                new QuestionCollectionManager().ReturnQuestion(questionCollection, randomNumber);
+            }
 
             
 
