@@ -25,15 +25,24 @@ namespace QuizGame
             count--;
             bool correct = new CheckAnswer().IsCorrect(question);
 
-            if (correct == true)
-            {
+            if (correct == true) {
                 Console.WriteLine("Correct!");
                 count = 0;
             } else
             {
-                Console.WriteLine($"No this is wrong, plz try again.You have now {count} attempts left.");
+                switch (count)
+                {
+                    case 2:
+                        Console.WriteLine($"Not quite right, plz try again!");
+                        return count;
+                    case 1:
+                        Console.WriteLine($"Oh no u wrong again...");
+                        return count;
+                    case 0:
+                        Console.WriteLine($"u bad. Next question for u.");
+                        return count;
+                }
             }
-
             return count;
         }
 

@@ -22,12 +22,3 @@ namespace QuizGame
 
     }
 }
-
-
-
-/*
-  else
-                {
-                    Console.WriteLine
-                } 
-*/
