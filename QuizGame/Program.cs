@@ -11,37 +11,23 @@ namespace QuizGame
     {
         static void Main(string[] args)
         {
-            /*string userName;
-            Console.WriteLine("Hi, write your name plz.");
-            userName = Console.ReadLine();
-            Console.WriteLine($"Hello {userName}, let's start playing hehehe."); */
 
             string fileName = @"C:\QuizGame\QuestionAnswer.json";
-            QuestionCollection questionCollection = new ReadJson().QC(fileName);
 
-            int maxInt = questionCollection.Questions.Count + 1;
+            string userName = new PrintToScreen().GiveName();
 
-            int score = 0;
+            QuestionCollection questionCollection = new ReadJson().ConvertJsonToObject(fileName);
 
-            // question id 1, 2, 3, 4 ... maxInt
-            List<int> questionId = new Generator().QuestionIds(maxInt);
+            int score = new Generator().ScoreTracker(questionCollection);
 
+            Dictionary<string, int> userScore = new Dictionary<string, int>();
+            userScore.Add(userName, score);
 
-            for (int i = 1; i < maxInt; i++)
+            foreach (KeyValuePair<string, int> kvp in userScore)
             {
-                int l = questionId.Count;
-                int randomNumber = new Random().Next(0, l);
-
-                int[] scoreTracker = new QuestionCollectionManager().ReturnQuestion(questionCollection, questionId[randomNumber]);
-
-                questionId.RemoveAt(randomNumber);
-                score += scoreTracker[1];
-
-                if (l == 1) {
-                    Console.WriteLine($"Your total score is: {score}!!");
-                }
-                
+                Console.WriteLine("Name: {0}, Score = {1} points", kvp.Key, kvp.Value);
             }
+            
         }
     }
 }
