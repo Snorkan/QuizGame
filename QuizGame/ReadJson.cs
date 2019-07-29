@@ -8,7 +8,7 @@ namespace QuizGame
 {
     public class ReadJson
     {   
-        public QuestionCollection QC(string fileName)
+        public QuestionCollection ConvertJsonToObject(string fileName)
         {
             string jsonTxt = string.Empty;
             using (StreamReader r = new StreamReader(fileName))
