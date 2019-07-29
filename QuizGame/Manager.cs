@@ -6,12 +6,10 @@ namespace QuizGame
 {
     public class Manager
     {
-
         //from the question collection -> single out one question object
         
         public Questions ChooseQuestion(QuestionCollection collection, int QuestionNumber)
         {
-
             foreach (var question in collection.Questions)
             {
                 if (question.QuestionId == QuestionNumber)
@@ -42,30 +40,16 @@ namespace QuizGame
             //countdown count - 1
             scoreTracker[0]--;
             
-            
             bool correct = new CheckAnswer().IsCorrect(question);
             
             if (correct == true) {
                 //Console.WriteLine("Correct!");
-                return new ReturnMessage().ReturnTrue(scoreTracker);
+                return new PrintToScreen().ReturnTrue(scoreTracker);
 
             } else
             {
-                switch (scoreTracker[0])
-                {
-                    case 2:
-                        Console.WriteLine($"Not quite right, plz try again!");
-                        return scoreTracker;
-                    case 1:
-                        Console.WriteLine($"Oh no u wrong again...");
-                        return scoreTracker;
-                    case 0:
-                        Console.WriteLine($"u bad. Next question for u.");
-                        return scoreTracker;
-                }
+                return new PrintToScreen().ReturnFalse(scoreTracker);
             }
-            
-            return scoreTracker;
         }
 
         
