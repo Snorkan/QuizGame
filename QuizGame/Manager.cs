@@ -20,36 +20,28 @@ namespace QuizGame
             return null;
         }
         // 
-        public int[] Loopiloop(Questions question, int[] scoreTracker)
+        public int[] Loopiloop(Questions question, int[] scoreTracker, bool isTrue)
         {
             //scoreStats[0] is the count
-          
+            
             while (scoreTracker[0] > 0)
             {
-                scoreTracker = new Manager().Countdown(question, scoreTracker);
+                
+                scoreTracker = new Manager().Countdown(question, scoreTracker, isTrue);
             }
             return scoreTracker;
         }
 
         //
-        public int[] Countdown(Questions question, int[] scoreTracker)
+        public int[] Countdown(Questions question, int[] scoreTracker, bool isTrue)
         {
             //scoreTracker[0] = count of how many attempt you got left
             //scoreTracker[1] = keep track of score
 
-            //countdown count - 1
             scoreTracker[0]--;
-            
-            bool correct = new CheckAnswer().IsCorrect(question);
-            
-            if (correct == true) {
-                //Console.WriteLine("Correct!");
-                return new PrintToScreen().ReturnTrue(scoreTracker);
 
-            } else
-            {
-                return new PrintToScreen().ReturnFalse(scoreTracker);
-            }
+            return new PrintToScreen().ReturnScore(scoreTracker, isTrue);
+
         }
 
         

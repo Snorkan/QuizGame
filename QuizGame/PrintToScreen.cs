@@ -38,46 +38,47 @@ namespace QuizGame
             return number;
         }
 
-        public int[] ReturnTrue(int[] scoreTracker)
+        public int[] ReturnScore(int[] scoreTracker, bool isTrue)
         {
-            //string message = string.Empty;
-            switch (scoreTracker[0])
+            
+            if (isTrue == true)
             {
-                case 2:
-                    scoreTracker[1] = 5;
-                    scoreTracker[0] = 0;
-                    Console.WriteLine($"Good job, u got {scoreTracker[1]} points!!");
-                    return scoreTracker;
-                case 1:
-                    scoreTracker[1] = 3;
-                    scoreTracker[0] = 0;
-                    Console.WriteLine($"Good job, u got {scoreTracker[1]} points!!");
-                    return scoreTracker;
-                case 0:
-                    scoreTracker[1] = 1;
-                    scoreTracker[0] = 0;
-                    Console.WriteLine($"Good job, u got {scoreTracker[1]} points!!");
-                    return scoreTracker;
+                switch (scoreTracker[0])
+                {
+                    case 2:
+                        scoreTracker[1] = 5;
+                        scoreTracker[0] = 0;
+                        Console.WriteLine($"Good job, u got {scoreTracker[1]} points!!");
+                        return scoreTracker;
+                    case 1:
+                        scoreTracker[1] = 3;
+                        scoreTracker[0] = 0;
+                        Console.WriteLine($"Good job, u got {scoreTracker[1]} points!!");
+                        return scoreTracker;
+                    case 0:
+                        scoreTracker[1] = 1;
+                        scoreTracker[0] = 0;
+                        Console.WriteLine($"Good job, u got {scoreTracker[1]} points!!");
+                        return scoreTracker;
+                }
+            }
+            else
+            {
+                switch (scoreTracker[0])
+                {
+                    case 2:
+                        Console.WriteLine($"Not quite right, plz try again!");
+                        return scoreTracker;
+                    case 1:
+                        Console.WriteLine($"Oh no u wrong again...");
+                        return scoreTracker;
+                    case 0:
+                        Console.WriteLine($"u bad. Next question for u.");
+                        return scoreTracker;
+                }
             }
             return scoreTracker;
         }
-
-        public int[] ReturnFalse(int[] scoreTracker)
-        {
-            switch (scoreTracker[0])
-            {
-                case 2:
-                    Console.WriteLine($"Not quite right, plz try again!");
-                    return scoreTracker;
-                case 1:
-                    Console.WriteLine($"Oh no u wrong again...");
-                    return scoreTracker;
-                case 0:
-                    Console.WriteLine($"u bad. Next question for u.");
-                    return scoreTracker;
-            }
-            return scoreTracker;
-        } 
 
     }
 }
