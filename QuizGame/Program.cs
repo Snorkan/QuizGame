@@ -12,22 +12,31 @@ namespace QuizGame
         static void Main(string[] args)
         {
 
-            string fileName = @"C:\QuizGame\QuestionAnswer.json";
+            
+
+            string fileQA = @"C:\QuizGame\QuestionAnswer.json";
+            string fileHighscore = @"C:\QuizGame\Highscore.json";
 
             string userName = new PrintToScreen().GiveName();
 
-            QuestionCollection questionCollection = new ReadJson().ConvertJsonToObject(fileName);
+            string txtQA = new ReadFile().ReadJson(fileQA);
+            string txtHighscore = new ReadFile().ReadJson(fileHighscore);
 
-            int score = new Generator().ScoreTracker(questionCollection);
+            QuestionCollection questionCollection = new ReadFile().ConvertToQuestionCollection(txtQA);
+            UserList userList = new ReadFile().ConvertToUserList(txtHighscore);
 
-            Dictionary<string, int> userScore = new Dictionary<string, int>();
-            userScore.Add(userName, score);
+            int score = new Generator().SelectRandom(questionCollection);
 
-            foreach (KeyValuePair<string, int> kvp in userScore)
-            {
-                Console.WriteLine("Name: {0}, Score = {1} points", kvp.Key, kvp.Value);
-            }
-            
+            //if new user, this returns 0. Old user returns saved scoring. 
+            int oldScore = new UpdateUser().ReturnScoreIfNameExists(userList, userName);
+
+            int newScore = score + oldScore; 
+
+            //adds new user to the list
+            new UpdateUser().AddScore(userList, userName, newScore);
+
+            //save to userlist json
+
         }
     }
 }
