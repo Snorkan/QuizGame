@@ -20,13 +20,13 @@ namespace QuizGame
             return null;
         }
         // 
-        public int[] Loopiloop(Questions question, int[] scoreTracker, bool isTrue)
+        public int[] Loopiloop(Questions question, int[] scoreTracker)
         {
             //scoreStats[0] is the count
             
             while (scoreTracker[0] > 0)
             {
-                
+                bool isTrue = new CheckAnswer().CompareAnswer(question);
                 scoreTracker = new Manager().Countdown(question, scoreTracker, isTrue);
             }
             return scoreTracker;
@@ -41,7 +41,6 @@ namespace QuizGame
             scoreTracker[0]--;
 
             return new PrintToScreen().ReturnScore(scoreTracker, isTrue);
-
         }
 
         

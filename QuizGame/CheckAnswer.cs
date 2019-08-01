@@ -5,10 +5,16 @@ using System.Text;
 namespace QuizGame
 {
     class CheckAnswer
-    {       
-        public bool IsCorrect(Questions question)
+    {
+
+        public bool CompareAnswer(Questions question) {
+            int userAnswer = new PrintToScreen().UserInput(question);
+            bool isTrue = new CheckAnswer().IsTrue(question, userAnswer);
+            return isTrue;
+        }
+        
+        public bool IsTrue(Questions question, int userAnswer)
         {
-            var userAnswer = new PrintToScreen().UserInput(question);
             var isTrue = false;
             foreach (var option in question.Options)
             {

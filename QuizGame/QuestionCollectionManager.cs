@@ -10,9 +10,10 @@ namespace QuizGame
         {
             int initializeCount = 3;
             int score = 0;
-            int[] scoreTracker = { initializeCount, score }; 
+            int[] scoreTracker = { initializeCount, score };
 
             Questions question = new Manager().ChooseQuestion(questionCollection, questionNumber);
+
             scoreTracker = new Manager().Loopiloop(question, scoreTracker);
             return scoreTracker;
         } 
