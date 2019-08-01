@@ -13,7 +13,6 @@ namespace QuizGame
         {
 
             
-
             string fileQA = @"C:\QuizGame\QuestionAnswer.json";
             string fileHighscore = @"C:\QuizGame\Highscore.json";
 
@@ -36,6 +35,8 @@ namespace QuizGame
             new UpdateUser().AddScore(userList, userName, newScore);
 
             //save to userlist json
+
+            new Save().SaveToFile(fileHighscore, userList);
 
         }
     }
