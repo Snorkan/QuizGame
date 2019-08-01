@@ -6,9 +6,9 @@ using System.Text;
 
 namespace QuizGame
 {
-    public class ReadJson
+    public class ReadFile
     {   
-        public QuestionCollection ConvertJsonToObject(string fileName)
+        public string ReadJson(string fileName)
         {
             string jsonTxt = string.Empty;
             using (StreamReader r = new StreamReader(fileName))
@@ -17,8 +17,20 @@ namespace QuizGame
                 jsonTxt = json.ToString();
             }
 
+            return jsonTxt;
+            
+        }
+        
+        public QuestionCollection ConvertToQuestionCollection(string jsonTxt)
+        {
             var questionCollection = JsonConvert.DeserializeObject<QuestionCollection>(jsonTxt);
             return questionCollection;
-        }   
+        }
+
+        public UserList ConvertToUserList(string jsonTxt)
+        {
+            var userList = JsonConvert.DeserializeObject<UserList>(jsonTxt);
+            return userList;
+        }
     }
 }
